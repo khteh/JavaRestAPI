@@ -1,8 +1,8 @@
 # RestAPI with Java 11, Tomcat 9, Spring Boot 2.1.2-SNAPSHOT and Docker
 * 3 controllers:
-- Greeting
-- Book
-- Author
+  - Greeting
+  - Book
+  - Author
 
 # Build
 ## To build Tomcat-deployable WAR application and docker image:
