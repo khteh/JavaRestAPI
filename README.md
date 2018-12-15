@@ -11,7 +11,7 @@
 # Start the application:
 ```docker run -d -t -p 8081:8080 khteh/tomcat:restapi-1.0```
 
-* visit http://localhost:<port>/restapi/greeting
-* visit http://localhost:<port>/restapi/greeting?name=Mickey%20Mouse
-* visit http://localhost:<port>/restapi/book
-* visit http://localhost:<port>/restapi/author
+* visit http://localhost:port/restapi/greeting
+* visit http://localhost:port/restapi/greeting?name=Mickey%20Mouse
+* visit http://localhost:port/restapi/book
+* visit http://localhost:port/restapi/author
