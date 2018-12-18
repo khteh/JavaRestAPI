@@ -1,4 +1,8 @@
 package com.restapi.controllers;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +26,7 @@ public class AuthorController {
 	private AuthorRepository repository;
 	
 	@GetMapping
-	public Iterable<Author> getAllAuthors() {
+	public List<Author> getAllAuthors() {
 		return repository.findAll();
 	}
 	@PostMapping

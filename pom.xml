@@ -15,6 +15,7 @@
 	<name>RestAPI</name>
 	<description>Spring Boot REST API</description>
 	<properties>
+		<proto.executable>/opt/protobuf-3.6.1/bin/protoc</proto.executable>
 		<docker.image.prefix>khteh/tomcat</docker.image.prefix>
 		<java.version>11</java.version>
 	</properties>
@@ -65,6 +66,29 @@
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+		<dependency>
+		    <groupId>com.google.protobuf</groupId>
+		    <artifactId>protobuf-java</artifactId>
+		    <version>3.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.protobuf-java-format/protobuf-java-format -->
+		<dependency>
+		    <groupId>com.googlecode.protobuf-java-format</groupId>
+		    <artifactId>protobuf-java-format</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
+		    <version>4.4.10</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -121,7 +145,44 @@
                         </goals>
                     </execution>
                 </executions>            	
-			</plugin>			
+			</plugin>
+			<plugin>
+			    <groupId>org.xolstice.maven.plugins</groupId>
+			    <artifactId>protobuf-maven-plugin</artifactId>
+			    <version>0.5.0</version>
+			    <executions>
+			        <execution>
+			            <id>protobuf-compile</id>
+			            <phase>generate-sources</phase>
+			            <goals>
+			                <goal>compile</goal>
+			            </goals>
+			            <configuration>
+			            	<protoSourceRoot>src/main/resources/protobuf</protoSourceRoot>
+			                <outputDirectory>src/main/java/com/restapi/protobuf</outputDirectory>
+			                <protocExecutable>${proto.executable}</protocExecutable>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>build-helper-maven-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>add-source</id>
+			            <phase>generate-sources</phase>
+			            <goals>
+			                <goal>add-source</goal>
+			            </goals>
+			            <configuration>
+			                <sources>
+			                    <source>src/main/java/com/restapi/protobuf</source>
+			                </sources>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
 		</plugins>
 		<extensions>
 		    <extension>
