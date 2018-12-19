@@ -13,10 +13,10 @@ RUN update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-11.0.1/b
 RUN update-alternatives --set jar /usr/lib/jvm/jdk-11.0.1/bin/jar
 RUN update-alternatives --set javac /usr/lib/jvm/jdk-11.0.1/bin/javac
 RUN useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
-RUN wget -q http://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.13/bin/apache-tomcat-9.0.13.tar.gz -P /tmp
+RUN wget -q http://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.14/bin/apache-tomcat-9.0.14.tar.gz -P /tmp
 RUN tar xf /tmp/apache-tomcat-9*.tar.gz -C /opt/tomcat
 RUN rm -f /tmp/*
-RUN ln -s /opt/tomcat/apache-tomcat-9.0.13 /opt/tomcat/latest
+RUN ln -s /opt/tomcat/apache-tomcat-9.0.14 /opt/tomcat/latest
 RUN chown -RH tomcat: /opt/tomcat/latest
 RUN chmod o+x /opt/tomcat/latest/bin
 ADD tomcat.service /etc/systemd/system/tomcat.service
