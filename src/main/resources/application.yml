@@ -4,14 +4,16 @@ server:
     context-path: /restapi
 spring:
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://svc-mysql:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    name:
     username: root
     password: ${MYSQL_ROOT_PASSWORD}
+    driver-class-name: com.mysql.jdbc.Driver
     hikari:
       data-source-properties:
         cachePrepStmts: true
