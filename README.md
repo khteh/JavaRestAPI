@@ -11,7 +11,7 @@
 * Update `proto.executable` in pom.xml with the location of the installed protoc
 
 ## To build Tomcat-deployable WAR application and docker image:
-```mvn clean package install```
+```mvn clean install -DskipTests```
 
 # Start the application:
 ```docker run -d -t -p 8081:8080 khteh/tomcat:restapi-1.0```
