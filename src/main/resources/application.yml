@@ -3,6 +3,13 @@ server:
   servlet:
     context-path: /restapi
 spring:
+  application:
+    name: RestAPI
+  profiles:
+    # The commented value for `active` can be replaced with valid spring profiles to load.
+    # Otherwise, it will be filled in by maven when building the WAR file
+    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: #spring.profiles.active#
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
@@ -10,10 +17,10 @@ spring:
       ddl-auto: update
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://svc-mysql:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: ${MYSQL_ROOT_PASSWORD}
-    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.jdbc.Driver
+    url:
+    username:
+    password:
     hikari:
       data-source-properties:
         cachePrepStmts: true

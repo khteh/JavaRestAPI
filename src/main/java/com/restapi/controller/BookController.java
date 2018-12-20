@@ -1,4 +1,4 @@
-package com.restapi.controllers;
+package com.restapi.controller;
 
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.restapi.models.Book;
-import com.restapi.repositories.BookRepository;
+import com.restapi.model.Book;
+import com.restapi.repository.BookRepository;
 @RestController
 @RequestMapping("/book")
 public class BookController {

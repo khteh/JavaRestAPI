@@ -1,4 +1,4 @@
-package com.restapi.tests;
+package com.restapi.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class GRPCRestApiTests {
+public class GRPCRestApiTest {
 	private static final String COURSE_URL = "http://localhost:8888/restapi/course/1";
 	private static final String ALL_COURSES_URL = "http://localhost:8888/restapi/course";
 	@Autowired

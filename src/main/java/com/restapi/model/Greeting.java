@@ -1,4 +1,4 @@
-package com.restapi.models;
+package com.restapi.model;
 public class Greeting {
 	private final long id;
 	private final String content;

@@ -95,60 +95,25 @@
 		    <artifactId>HikariCP</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-extension</artifactId>
+                <version>1.4.9</version>
+            </extension>
+        </extensions>
+        <defaultGoal>spring-boot:run</defaultGoal>
+        <testResources>
+            <testResource>
+                <directory></directory>
+            </testResource>
+        </testResources>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-            <plugin>
-            	<groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.9</version>
-                <configuration>
-					<imageName>${docker.image.prefix}</imageName>
- 					<!--<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>-->
-					<!--<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>target/${project.build.finalName}.jar</include>
-						</resource>
-					</resources>-->					                
-                	<repository>${docker.image.prefix}</repository>
-                   	<tag>${project.artifactId}-${project.version}</tag>
-                    <buildArgs>
-                      	<JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
-                    </buildArgs>
-            	</configuration>
-                <executions>
-					<execution>
-					      <id>build-image</id>
-					      <phase>package</phase>
-					      <goals>
-					        <goal>build</goal>
-					      </goals>
-				    </execution>
-                    <execution>
-					      <id>tag-image</id>
-					      <phase>package</phase>
-					      <goals>
-					        <goal>tag</goal>
-					      </goals>
-					      <configuration>
-					        <image>${docker.image.prefix}</image>
-					        <newName>${docker.image.prefix}:${project.artifactId}-${project.version}</newName>
-					      </configuration>
-					</execution>
-                	<execution>
-                    	<id>install</id>
-                    	<phase>install</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>            	
 			</plugin>
 			<plugin>
 			    <groupId>org.xolstice.maven.plugins</groupId>
@@ -163,7 +128,8 @@
 			            </goals>
 			            <configuration>
 			            	<protoSourceRoot>src/main/resources/protobuf</protoSourceRoot>
-			                <outputDirectory>src/main/java/com/restapi/protobuf</outputDirectory>
+			                <outputDirectory>src/main/java</outputDirectory>
+			                <clearOutputDirectory>false</clearOutputDirectory>
 			                <protocExecutable>${proto.executable}</protocExecutable>
 			            </configuration>
 			        </execution>
@@ -187,15 +153,85 @@
 			        </execution>
 			    </executions>
 			</plugin>
-		</plugins>
-		<extensions>
-		    <extension>
-		      <groupId>com.spotify</groupId>
-		      <artifactId>dockerfile-maven-extension</artifactId>
-		      <version>1.4.9</version>
-		    </extension>
-	  	</extensions>		
-	</build>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <version>3.0.0-M2</version>
+				<configuration>
+		            <includes>
+		                <include>**/*Test*.java</include>
+		            </includes>
+		        </configuration>			    
+			</plugin>			
+        </plugins>
+    </build>
+	<profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+				<plugins>
+		            <plugin>
+		            	<groupId>com.spotify</groupId>
+		                <artifactId>dockerfile-maven-plugin</artifactId>
+		                <version>1.4.9</version>
+		                <configuration>
+							<imageName>${docker.image.prefix}</imageName>
+		 					<!--<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>-->
+							<!--<resources>
+								<resource>
+									<targetPath>/</targetPath>
+									<directory>${project.build.directory}</directory>
+									<include>target/${project.build.finalName}.jar</include>
+								</resource>
+							</resources>-->					                
+		                	<repository>${docker.image.prefix}</repository>
+		                   	<tag>${project.artifactId}-${project.version}</tag>
+		                    <buildArgs>
+		                      	<JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
+		                    </buildArgs>
+		            	</configuration>
+		                <executions>
+							<execution>
+							      <id>build-image</id>
+							      <phase>package</phase>
+							      <goals>
+							        <goal>build</goal>
+							      </goals>
+						    </execution>
+		                    <execution>
+							      <id>tag-image</id>
+							      <phase>package</phase>
+							      <goals>
+							        <goal>tag</goal>
+							      </goals>
+							      <configuration>
+							        <image>${docker.image.prefix}</image>
+							        <newName>${docker.image.prefix}:${project.artifactId}-${project.version}</newName>
+							      </configuration>
+							</execution>
+		                	<execution>
+		                    	<id>install</id>
+		                    	<phase>install</phase>
+		                        <goals>
+		                            <goal>push</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>            	
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>

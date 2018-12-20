@@ -1,4 +1,4 @@
-package com.restapi.controllers;
+package com.restapi.controller;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restapi.models.Book;
-import com.restapi.models.Author;
-import com.restapi.repositories.AuthorRepository;
+import com.restapi.model.Book;
+import com.restapi.model.Author;
+import com.restapi.repository.AuthorRepository;
 
 @RestController
 @RequestMapping("/author")
