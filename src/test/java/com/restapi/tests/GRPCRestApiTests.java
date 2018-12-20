@@ -1,4 +1,4 @@
-package com.restapi.grpc.tests;
+package com.restapi.tests;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
