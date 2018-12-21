@@ -9,19 +9,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.model.Book;
+import com.restapi.exception.ResourceNotFoundException;
 import com.restapi.model.Author;
 import com.restapi.repository.AuthorRepository;
 
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
+	private static final Log log = LogFactory.getLog(AuthorController.class);
 	@Autowired
 	private AuthorRepository repository;
 	
@@ -30,10 +35,14 @@ public class AuthorController {
 		return repository.findAll();
 	}
 	@PostMapping
-	public Author newAuthor(@RequestBody Author author) { return repository.save(author); }
+	public Author newAuthor(@RequestBody Author author) {
+		log.info("/author/newAuthor: "+author.toString());
+		return repository.save(author); 
+	}
 	@PutMapping("/{id}")
-	public Author updateAuthor(@RequestBody Author author, @PathVariable Long id) {
-		return repository.findById(id).map(a -> {
+	public Author updateAuthor(@RequestBody final Author author, @PathVariable Long id) {
+		log.info("/author/updateAuthor/"+id+": "+author.toString());
+		return (Author) repository.findById(id).map(a -> {
 			a.setFirstName(author.getFirstName());
 			a.setLastName(author.getLastName());
 			return repository.save(a);
@@ -43,5 +52,10 @@ public class AuthorController {
 		});
 	}
 	@DeleteMapping("/{id}")
-	public void deleteAuthor(@PathVariable Long id) { repository.deleteById(id);	}
+	public ResponseEntity<?> deleteAuthor(@PathVariable Long id) {
+		log.info("/author/deleteAuthor/"+id);		
+		Author author = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("author", "id", id));
+		repository.delete(author);
+		return ResponseEntity.ok().build();
+	}
 }

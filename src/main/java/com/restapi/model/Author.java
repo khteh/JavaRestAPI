@@ -1,19 +1,25 @@
 package com.restapi.model;
 import lombok.Data;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import com.restapi.model.Author;
 @Entity
 @Data
+@Table(name="author")
 public class Author {
 	private @Id @GeneratedValue Long id;
+	@Column(name="first_name")
 	private String first_name;
+	@Column(name="last_name")
 	private String last_name;
+	@Column(name="email")
 	private String email;
+	@Column(name="phone")
 	private String phone;
 	public Author() {}
 	public Author(Long id) { this.id = id; }

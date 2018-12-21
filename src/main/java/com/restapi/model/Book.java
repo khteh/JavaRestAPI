@@ -1,5 +1,7 @@
 package com.restapi.model;
 import lombok.Data;
+import com.restapi.model.Author;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,10 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Data
+@Table(name="book")
 public class Book {
 	private @Id @GeneratedValue Long id;
+	@Column(name="page_count")
 	private int page_count;
+	@Column(name="title")
 	private String title;
+	@Column(name="isbn")
 	private String isbn;
 	@ManyToOne
 	@JoinColumn(name = "author_id", nullable = false, updatable = false)
@@ -28,7 +34,7 @@ public class Book {
 	public void setPageCount(int count) { page_count = count; }
 	public void setTitle(String name) { title = name; }
 	public void setIsbn(String name) { isbn = name; }
-	public void setAuthor(Author authoer) { this.author = author; }
+	public void setAuthor(Author author) { this.author = author; }
 	@Override
 	public boolean equals(Object o) {
 		return this == o || (o != null && getClass() == o.getClass() && id.equals(((Book)o).id));
