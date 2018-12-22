@@ -17,7 +17,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 
+    password: # set this in tomcat setenv.sh with -Dspring.datasource.password
     hikari:
       data-source-properties:
         cachePrepStmts: true
