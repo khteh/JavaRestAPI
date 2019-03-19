@@ -95,7 +95,6 @@ public class AppConfig {
 		converters.add(converter);
 		http2Template.setMessageConverters(converters);
 		return http2Template;
-		//return new RestTemplate(Arrays.asList(converter));
 	}
 	private List<Student> createTestStudents() {
 		List<Student> students = new ArrayList<Student>();
