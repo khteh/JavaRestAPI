@@ -1,9 +1,13 @@
-# RestAPI with GRPC, Java 11, Tomcat 9, Spring Boot 2.1.2-SNAPSHOT and Docker
+# RestAPI with GRPC, Java 11, Tomcat 9, Spring Boot 2.2.0-SNAPSHOT and Docker
 * 4 controllers:
   - Greeting
   - Book
   - Author
   - Course (GRPC)
+
+# The following protocols are used:
+* HTTP/2
+* GRPC
   
 # Build
 ## Database
