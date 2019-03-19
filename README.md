@@ -6,6 +6,9 @@
   - Course (GRPC)
   
 # Build
+## Database
+* Import "Book" database from src/main/resources/Database folder
+
 ## Protocol Buffer
 * Download procotol buffer compiler from https://github.com/protocolbuffers/protobuf/releases
 * Extract the downloaded .zip and copy protoc binary to system folders, /usr/local/bin, for instance
