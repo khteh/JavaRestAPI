@@ -26,6 +26,7 @@ import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
@@ -89,7 +90,12 @@ public class AppConfig {
 	}
 	@Bean
 	public RestTemplate restTemplate(ProtobufHttpMessageConverter converter) {
-		return new RestTemplate(Arrays.asList(converter));
+		RestTemplate http2Template = new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+		List<HttpMessageConverter<?>> converters = http2Template.getMessageConverters();
+		converters.add(converter);
+		http2Template.setMessageConverters(converters);
+		return http2Template;
+		//return new RestTemplate(Arrays.asList(converter));
 	}
 	private List<Student> createTestStudents() {
 		List<Student> students = new ArrayList<Student>();
