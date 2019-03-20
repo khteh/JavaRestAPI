@@ -16,7 +16,7 @@
 	<description>Spring Boot REST API</description>
 	<properties>
 		<proto.executable>protoc</proto.executable>
-		<docker.image.prefix>${project.artifactId}</docker.image.prefix>
+		<docker.image.prefix>khteh</docker.image.prefix>
 		<java.version>11</java.version>
 		<start-class>com.restapi.RestApiApplication</start-class>
 	</properties>
@@ -171,6 +171,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                   <execution>
+                      <goals>
+                         <goal>build-info</goal>
+                      </goals>
+                   </execution>
+                </executions>
+                <!-- <configuration>
+                   <executable>true</executable>
+                </configuration>-->
 			</plugin>
 			<plugin>
 				<!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
@@ -291,51 +301,62 @@
 		            	<groupId>com.spotify</groupId>
 		                <artifactId>dockerfile-maven-plugin</artifactId>
 		                <version>1.4.10</version>
-		                <configuration>
-							<!-- <imageName>${docker.image.prefix}</imageName> -->
-							<repository>khteh/${project.artifactId}</repository>
-							<image>${project.artifactId}</image>
-		                   	<tag>${buildNumber}</tag>
-		                    <!-- <buildArgs>
-		                      	<JAR_FILE>target/${project.build.finalName}.war</JAR_FILE>
-		                    </buildArgs>-->
-		            	</configuration>
 		                <executions>
 							<execution>
-							      <id>build-image</id>
-							      <phase>package</phase>
-							      <goals>
+							    <id>build-image</id>
+							    <phase>package</phase>
+							    <goals>
 							        <goal>build</goal>
-							      </goals>
-							      <configuration>
-							        <image>${project.artifactId}</image>
-						            <tag>${buildNumber}</tag>
-							      </configuration>
+							    </goals>
+							    <configuration>
+							        <repository>${project.artifactId}</repository>
+							    </configuration>
 						    </execution>
 		                    <execution>
-							      <id>tag-image</id>
-							      <phase>package</phase>
-							      <goals>
+							    <id>tag-image-latest</id>
+							    <phase>package</phase>
+							    <goals>
 							        <goal>tag</goal>
-							      </goals>
-							      <configuration>
-							        <image>${project.artifactId}</image>
+							    </goals>
+							    <configuration>
+									<repository>${docker.image.prefix}/${project.artifactId}</repository>
 						            <tag>latest</tag>
-							        <!-- <newName>${docker.image.prefix}:${project.artifactId}-${project.version}</newName> -->
-							      </configuration>
+								</configuration>
+							</execution>
+		                    <execution>
+							    <id>tag-image-version</id>
+							    <phase>package</phase>
+							    <goals>
+							        <goal>tag</goal>
+							    </goals>
+							    <configuration>
+									<repository>${docker.image.prefix}/${project.artifactId}</repository>
+						            <tag>${project.version}</tag>
+								</configuration>
 							</execution>
 		                	<execution>
-		                    	<id>install</id>
+		                    	<id>push-latest-image</id>
 		                    	<phase>install</phase>
 		                        <goals>
 		                            <goal>push</goal>
 		                        </goals>
+							    <configuration>
+									<repository>${docker.image.prefix}/${project.artifactId}</repository>
+						            <tag>latest</tag>
+								</configuration>
 		                    </execution>
 		                </executions>            	
 					</plugin>
 					<plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
+		                <executions>
+		                    <execution>
+		                        <goals>
+		                            <goal>build-info</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
                         <configuration>
                             <profiles>
                                 <profile>prod</profile>
