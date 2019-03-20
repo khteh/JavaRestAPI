@@ -46,7 +46,7 @@ spring:
     port: 6379
     ssl: false
     timeout: 60000 # 1 minute
-    password: TaigerSingapore123*
+    password: ${MYSQL_ROOT_PASSWORD}
     jedis:
       pool:
         max-active: 1
