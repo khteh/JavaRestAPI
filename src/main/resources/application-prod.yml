@@ -55,3 +55,16 @@ spring:
         min-idle: 5
 jmx:
   default-domain: restapi
+endpoints:
+    health:
+        sensitive: true #set to true to enable authentication (since by default this endpoint is enabled)
+    info:
+        sensitive: true #set to true to enable authentication (since by default this endpoint is enabled)
+info:
+    build:
+        build-time: ${timestamp}
+        artifact: ${project.artifactId}
+        name: ${project.name}
+        group: ${project.groupId}
+        version: ${project.version}
+  
