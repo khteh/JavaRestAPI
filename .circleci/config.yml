@@ -53,11 +53,12 @@ jobs:
           name: Build & Push docker image
           command: |
             VERSION=v$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.6.0:exec).$CIRCLE_BUILD_NUM
-            if [ "${CIRCLE_BRANCH}" != "main" ]
+            if [ "${CIRCLE_BRANCH}" != "master" ]
               then
                 VERSION=dev-$VERSION
             fi
             docker build -t khteh/restapi:latest -t khteh/restapi:$VERSION .
+            docker push khteh/restapi:latest khteh/restapi:$VERSION
             echo ${VERSION} > docker-build_number.txt
       - save_cache:
           name: Save Maven Dependency Cache
