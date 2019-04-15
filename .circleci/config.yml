@@ -48,7 +48,7 @@ jobs:
             hash -r
       - run: 
           name: Build Application
-          command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod
+          command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod -DskipTests
       - run:
           name: Build & Push docker image
           command: |
