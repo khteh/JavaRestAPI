@@ -33,11 +33,6 @@ jobs:
           - v2-dependencies-{{ checksum "pom.xml" }}
           # fallback to using the latest cache if no exact match is found
           - v2-dependencies-
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      # Download and run elasticsearch
       - setup_remote_docker:
           docker_layer_caching: true
       # Maven clean and install projects
@@ -62,11 +57,6 @@ jobs:
           paths:
             - ~/.m2
           key: v2-dependencies-{{ checksum "pom.xml" }}
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
       - persist_to_workspace:
           name: Save Workspace
           root: .
