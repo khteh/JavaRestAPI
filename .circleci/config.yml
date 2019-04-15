@@ -39,6 +39,13 @@ jobs:
       - run: 
           name: Login to Docker Hub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Install Protocol Buffer compiler
+          command: |
+            wget -q https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc-3.7.1-linux-x86_64.zip
+            unzip protoc-3.7.1-linux-x86_64.zip
+            cp bin/protoc /usr/local/bin
+            hash -r
       - run: 
           name: Build Application
           command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod
