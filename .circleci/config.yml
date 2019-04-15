@@ -58,7 +58,8 @@ jobs:
                 VERSION=dev-$VERSION
             fi
             docker build -t khteh/restapi:latest -t khteh/restapi:$VERSION .
-            docker push khteh/restapi:latest khteh/restapi:$VERSION
+            docker push khteh/restapi:latest
+            docker push khteh/restapi:$VERSION
             echo ${VERSION} > docker-build_number.txt
       - save_cache:
           name: Save Maven Dependency Cache
