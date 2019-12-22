@@ -89,7 +89,6 @@ public class GRPCRestApiTest {
 	}
 	@Test
 	public void GetOneCourseUsingHttpClient() throws IOException {
-		assertNotNull("autowired restTemplate is NULL!", restTemplate);
 		InputStream response = executeHttpRequest(COURSE_URL);
 		String json = protobufToCourseJson(response);
 		assertResponse(json);
@@ -102,7 +101,6 @@ public class GRPCRestApiTest {
 	}
 	@Test
 	public void GetAllCoursesUsingHttpClient() throws IOException {
-		assertNotNull("autowired restTemplate is NULL!", restTemplate);
 		InputStream response = executeHttpRequest(ALL_COURSES_URL);
 		String json = protobufToCoursesJson(response);
 		assertResponse(json);
