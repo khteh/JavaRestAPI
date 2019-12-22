@@ -11,7 +11,7 @@
   
 # Build
 ## Database
-* Import "Book" database from src/main/resources/Database folder
+* Import "Book" database from src/main/resources/db folder
 
 ## Protocol Buffer
 * Download procotol buffer compiler from https://github.com/protocolbuffers/protobuf/releases
