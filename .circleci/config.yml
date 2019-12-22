@@ -22,10 +22,10 @@ jobs:
       - checkout
       - run: 
           name: Install Python Pip
-          command: sudo apt install -y python-pip
-      - run: 
-          name: Install AWS CLI
-          command: sudo pip install awscli
+          command: sudo apt install -y awscli
+      #- run: 
+      #    name: Install AWS CLI
+      #    command: sudo pip install awscli
       # Download and cache dependencies
       - restore_cache:
           name: Restore Maven Dependency Cache
