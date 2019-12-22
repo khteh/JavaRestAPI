@@ -22,7 +22,9 @@ jobs:
       - checkout
       - run: 
           name: Install Python Pip
-          command: sudo apt install -y awscli
+          command: |
+            apt update -y
+            apt install -y awscli
       #- run: 
       #    name: Install AWS CLI
       #    command: sudo pip install awscli
