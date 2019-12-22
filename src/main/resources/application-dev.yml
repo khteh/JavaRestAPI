@@ -31,9 +31,9 @@ spring:
       ddl-auto: update
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: ${MYSQL_ROOT_PASSWORD} # set this in tomcat setenv.sh with -Dspring.datasource.password
+    url: jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: guest
+    password: P@$$w0rd # set this in tomcat setenv.sh with -Dspring.datasource.password
     hikari:
       connection-init-sql: SET NAMES utf8mb4
       data-source-properties:
