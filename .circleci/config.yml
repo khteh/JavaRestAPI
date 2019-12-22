@@ -34,7 +34,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v2-dependencies-
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       # Maven clean and install projects
       - run: 
           name: Login to Docker Hub
