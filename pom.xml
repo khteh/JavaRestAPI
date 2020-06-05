@@ -17,7 +17,7 @@
 	<properties>
 		<proto.executable>protoc</proto.executable>
 		<docker.image.prefix>khteh</docker.image.prefix>
-		<java.version>13</java.version>
+		<java.version>14</java.version>
 		<start-class>com.restapi.RestApiApplication</start-class>
 	</properties>
 	<dependencies>
