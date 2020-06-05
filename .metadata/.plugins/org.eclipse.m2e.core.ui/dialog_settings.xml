@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Projects\Java\RestAPIDocker"/>
 			<item value="C:\Projects\Java\workspace\RestAPIDocker"/>
 		</list>
 		<list key="projectNameTemplate">
