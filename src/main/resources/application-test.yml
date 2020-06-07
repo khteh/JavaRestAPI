@@ -1,0 +1,65 @@
+server:
+  port: 8082
+  http2:
+    enabled: true
+  servlet:
+    context-path: /restapi
+spring:
+  application:
+    name: RestAPI
+  profiles: dev
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: MYSQL
+    show-sql: true
+    open-in-view: false
+    generate-ddl: true
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+      hibernate.javax.cache.provider: org.ehcache.jsr107.EhcacheCachingProvider
+      hibernate.javax.cache.missing_cache_strategy: create
+      javax:
+        properties:
+          persistence:
+            sharedCahce:
+              mode: ALL
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  cache:
+    redis:
+      time-to-live: 60000ms
+  redis:
+    host: localhost
+    port: 6379
+    ssl: false
+    timeout: 60000 # 1 minute
+    password: ${MYSQL_ROOT_PASSWORD}
+    jedis:
+      pool:
+        max-active: 1
+        max-idle: 25
+        max-wait: 30000ms
+        min-idle: 5      
+jmx:
+  default-domain: restapi
+endpoints:
+    health:
+        sensitive: true #set to true to enable authentication (since by default this endpoint is enabled)
+    info:
+        sensitive: true #set to true to enable authentication (since by default this endpoint is enabled)
+info:
+    build:
+        build-time: ${timestamp}
+        artifact: ${project.artifactId}
+        name: ${project.name}
+        group: ${project.groupId}
+        version: ${project.version}  

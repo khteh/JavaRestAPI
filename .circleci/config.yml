@@ -53,8 +53,8 @@ jobs:
           name: Build Application
           command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod -DskipTests
       - run: 
-          name: Test Application
-          command: mvn test
+          name: Test Application using in-memory H2 database
+          command: mvn test -Ptest
       - run:
           name: Build & Push docker image
           command: |
