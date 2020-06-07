@@ -48,6 +48,7 @@ jobs:
             unzip protoc-3.12.2-linux-x86_64.zip
             sudo cp bin/protoc /usr/local/bin
             hash -r
+            protoc --version
       - run: 
           name: Build Application
           command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod -DskipTests
