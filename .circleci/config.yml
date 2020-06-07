@@ -4,7 +4,7 @@
 #
 version: 2.1
 jobs:
-  build:
+  build_and_test:
     working_directory: ~/workspace
     docker:
       # note: we are using jdk build 8u171 as there is a bug in 8u181 causing builds to fail
@@ -49,10 +49,12 @@ jobs:
             sudo cp bin/protoc /usr/local/bin
             sudo chmod +x /usr/local/bin/protoc
             hash -r
-            protoc --version
       - run: 
           name: Build Application
           command: mvn clean install dependency:resolve-plugins dependency:go-offline -Pprod -DskipTests
+      - run: 
+          name: Test Application
+          command: mvn test
       - run:
           name: Build & Push docker image
           command: |
@@ -76,3 +78,7 @@ jobs:
           paths:
             - target/restapi.war
             - docker-build_number.txt
+workflows:
+  main:
+    jobs:
+      - build_and_test
