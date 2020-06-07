@@ -1,4 +1,4 @@
-# RestAPI with GRPC, Java 11, Tomcat 9, Spring Boot 2.2.2.RELEASE and Docker
+# RestAPI with GRPC, Java 11, Tomcat 9, Spring Boot 2.4.0-SNAPSHOT and Docker
 * 4 controllers:
   - Greeting
   - Book
