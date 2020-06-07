@@ -18,13 +18,13 @@
 * Extract the downloaded .zip and copy protoc binary to system folders, /usr/local/bin, for instance
 
 ## To build Tomcat-deployable WAR application and docker image:
-```mvn clean install```
+`mvn clean install`
 
 ## Continuous Integration
 * Integrated with CircleCI
 
 # Start the application:
-```docker run -d -t -p 8081:8080 khteh/tomcat:restapi-1.0```
+`docker run -d -t -p 8081:8080 khteh/restapi:latest`
 
 * visit http://localhost:port/restapi/greeting
 * visit http://localhost:port/restapi/greeting?name=Mickey%20Mouse
