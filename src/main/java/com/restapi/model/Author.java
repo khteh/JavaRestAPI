@@ -1,6 +1,5 @@
 package com.restapi.model;
 import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +41,6 @@ public class Author {
 	public int hashCode() { return id.hashCode(); }
 	@Override
 	public String toString() {
-		return "Author { id = " + id + ", first_name = '" + first_name + "', last_name = '" + last_name + "'}";
+		return "Author { id = " + id + ", first_name = '" + first_name + "', last_name = '" + last_name + "', email = '\" + email + \"', phone = '\" + phone + \"'}";
 	}
 }
