@@ -41,6 +41,6 @@ public class Author {
 	public int hashCode() { return id.hashCode(); }
 	@Override
 	public String toString() {
-		return "Author { id = " + id + ", first_name = '" + first_name + "', last_name = '" + last_name + "', email = '\" + email + \"', phone = '\" + phone + \"'}";
+		return "Author { id = " + id + ", first_name = '" + first_name + "', last_name = '" + last_name + "', email = '" + email + "', phone = '" + phone + "'}";
 	}
 }
