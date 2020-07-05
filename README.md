@@ -10,8 +10,13 @@
 * GRPC
   
 # Build
+
 ## Database
-* Import "Book" database from src/main/resources/db folder
+* Create "library" database:
+```
+CREATE DATABASE `library` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+```
+* Import "Library" database tables from src/main/resources/db folder
 
 ## Protocol Buffer
 * Download procotol buffer compiler from https://github.com/protocolbuffers/protobuf/releases

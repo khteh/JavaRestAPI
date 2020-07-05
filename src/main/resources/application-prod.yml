@@ -28,7 +28,7 @@ spring:
       ddl-auto: update
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://svc-mysql:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://svc-mysql:3306/library?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: ${MYSQL_ROOT_PASSWORD}
     hikari:
