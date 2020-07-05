@@ -23,7 +23,7 @@ spring:
             sharedCahce:
               mode: ALL
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;database_to_upper=false
     username: sa
     password: password
     driverClassName: org.h2.Driver
